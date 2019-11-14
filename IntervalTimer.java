@@ -6,7 +6,7 @@ public class IntervalTimer extends Timer{
     public IntervalTimer(){
         timer = new Timer();
         intervaler = new Intervaler();
-        timer.schedule(intervaler, 1000);
+        timer.schedule(intervaler, 1000, 1000);
     }
     public static void main(String[] args) {
         System.out.println("Hello World");
