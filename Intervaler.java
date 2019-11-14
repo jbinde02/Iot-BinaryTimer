@@ -14,4 +14,10 @@ public class Intervaler extends TimerTask{
         currentSeconds++;
         System.out.println(currentSeconds + " Seconds");
     }
+    public void setRunning(boolean running){
+        this.running = running;
+    }
+    public void setCurrentSeconds(int currentSeconds){
+        this.currentSeconds = currentSeconds;
+    }
 }
