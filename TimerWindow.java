@@ -1,6 +1,7 @@
 import javax.swing.*;
+import java.awt.event.*;
 
-public class TimerWindow {
+public class TimerWindow implements ActionListener{
     JFrame frame;
     JPanel panel;
     JButton button1, button2;
@@ -12,12 +13,19 @@ public class TimerWindow {
         frame.setVisible(true);
         panel = new JPanel();
         frame.add(panel);
+
         button1 = new JButton("Start/Stop");
         panel.add(button1);
-        button2 = new JButton("Clear");
+        button1.addActionListener(this);
+
+        button2 = new JButton("Clear");       
         panel.add(button2);
+        button1.addActionListener(this);
+        
         area = new JTextArea(5, 20);
         panel.add(area);
-        area.append("Hello World!");
+    }
+    public void actionPerformed(ActionEvent e) {
+        area.append("Hello");
     }
 }
