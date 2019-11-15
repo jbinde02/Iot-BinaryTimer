@@ -5,18 +5,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Intervaler extends TimerTask{
-
     int currentSeconds;
     int currentMinutes;
     boolean isRunning;
-
     JFrame frame;
     JPanel panel;
     JButton button1, button2;
     JTextArea area;
     ButtonListener buttonListener;
     Intervaler intervaler;
-
     public Intervaler(){
         currentSeconds = 0;
         currentMinutes = 0;
@@ -50,7 +47,7 @@ public class Intervaler extends TimerTask{
                 currentMinutes++;
             }
         }
-        //System.out.println(currentSeconds);
+        System.out.println(currentSeconds);
         //This long thing sets the text area with the current mintues and seconds.
         area.setText(Integer.toString(currentMinutes) + " : " + Integer.toString(currentSeconds));    
     }
@@ -60,7 +57,15 @@ public class Intervaler extends TimerTask{
     public void setCurrentSeconds(int currentSeconds){
         this.currentSeconds = currentSeconds;
     }
-
+    public void setCurrentMinutes(int currentMinutes){
+        this.currentMinutes = currentMinutes;
+    }
+    public int getCurrentSeconds(){
+        return currentSeconds;
+    }
+    public int getCurrentMinutes(){
+        return currentSeconds;
+    }
     public void handleButtonPress(Object src){
         //Start/Stop button
         if(src == button1 && isRunning){          
@@ -70,7 +75,7 @@ public class Intervaler extends TimerTask{
             isRunning = true;
             area.append(" Started! ");
         }
-
+        //Clear button
         if(src == button2){
             area.setText("Cleared");
             currentSeconds = 0;
