@@ -20,8 +20,8 @@ public class Intervaler extends TimerTask{
     public Intervaler(){
         currentSeconds = 0;
         currentMinutes = 0;
-        isRunning = true;
-
+        isRunning = false;
+        //Creates the frame
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
@@ -29,14 +29,14 @@ public class Intervaler extends TimerTask{
         panel = new JPanel();
         frame.add(panel);
         buttonListener = new ButtonListener(this);
-
+        //Start/Stop button
         button1 = new JButton("Start/Stop");
         panel.add(button1);
         button1.addActionListener(buttonListener);
-
+        //Clear Timer Button
         button2 = new JButton("Clear");       
         panel.add(button2);
-        button1.addActionListener(buttonListener);
+        button2.addActionListener(buttonListener);
         
         area = new JTextArea(5, 20);
         panel.add(area);
@@ -50,9 +50,9 @@ public class Intervaler extends TimerTask{
                 currentMinutes++;
             }
         }
-        System.out.println(currentSeconds);
+        //System.out.println(currentSeconds);
         //This long thing sets the text area with the current mintues and seconds.
-        area.setText(Integer.toString(currentMinutes) + " Mintues" + Integer.toString(currentSeconds) + " Seconds");    
+        area.setText(Integer.toString(currentMinutes) + " : " + Integer.toString(currentSeconds));    
     }
     public void setRunning(boolean isRunning){
         this.isRunning = isRunning;
@@ -62,15 +62,15 @@ public class Intervaler extends TimerTask{
     }
 
     public void handleButtonPress(Object src){
-        if(src == button1){          
-            if(isRunning){
-                isRunning = false;
-                area.append(" Stopped");
-            }else{
-                isRunning = true;
-                area.append(" Started");                
-            }
+        //Start/Stop button
+        if(src == button1 && isRunning){          
+            isRunning = false;
+            area.append(" Stopped! ");
+        }else if(src == button1 && !isRunning){
+            isRunning = true;
+            area.append(" Started! ");
         }
+
         if(src == button2){
             area.setText("Cleared");
             currentSeconds = 0;
