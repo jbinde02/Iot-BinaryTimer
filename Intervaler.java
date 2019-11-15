@@ -14,10 +14,12 @@ public class Intervaler extends TimerTask{
     JTextArea area;
     ButtonListener buttonListener;
     Intervaler intervaler;
+    PiControlGpio controlGpio;
     public Intervaler(){
         currentSeconds = 0;
         currentMinutes = 0;
         isRunning = false;
+        controlGpio = new PiControlGpio();
         //Creates the frame
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +36,7 @@ public class Intervaler extends TimerTask{
         button2 = new JButton("Clear");       
         panel.add(button2);
         button2.addActionListener(buttonListener);
-        
+        //Creates the text area
         area = new JTextArea(5, 20);
         panel.add(area);
     }
@@ -47,9 +49,10 @@ public class Intervaler extends TimerTask{
                 currentMinutes++;
             }
         }
-        System.out.println(currentSeconds);
         //This long thing sets the text area with the current mintues and seconds.
-        area.setText(Integer.toString(currentMinutes) + " : " + Integer.toString(currentSeconds));    
+        area.setText(Integer.toString(currentMinutes) + " : " + Integer.toString(currentSeconds)); 
+        controlGpio.setBinaryTime(currentSeconds, currentMinutes);
+        area.append("\n" + controlGpio.getBinaryMinutes() + " : " + controlGpio.getBinarySeconds());   
     }
     public void setRunning(boolean isRunning){
         this.isRunning = isRunning;
