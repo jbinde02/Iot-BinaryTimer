@@ -1,35 +1,80 @@
 import java.util.TimerTask;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class Intervaler extends TimerTask{
 
     int currentSeconds;
     int currentMinutes;
-    boolean running;
-    TimerWindow timerWindow;
+    boolean isRunning;
+
+    JFrame frame;
+    JPanel panel;
+    JButton button1, button2;
+    JTextArea area;
+    ButtonListener buttonListener;
+    Intervaler intervaler;
 
     public Intervaler(){
         currentSeconds = 0;
         currentMinutes = 0;
-        running = true;
-        timerWindow = new TimerWindow();
+        isRunning = true;
+
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+        panel = new JPanel();
+        frame.add(panel);
+        buttonListener = new ButtonListener(this);
+
+        button1 = new JButton("Start/Stop");
+        panel.add(button1);
+        button1.addActionListener(buttonListener);
+
+        button2 = new JButton("Clear");       
+        panel.add(button2);
+        button1.addActionListener(buttonListener);
+        
+        area = new JTextArea(5, 20);
+        panel.add(area);
     }
     public void run(){
-        if(running = true){
-        if(currentSeconds<60){
-            currentSeconds++;
-        }else{
-            currentSeconds = 0;
-            currentMinutes++;
+        if(isRunning){
+            if(currentSeconds<60){
+                currentSeconds++;
+            }else{
+                currentSeconds = 0;
+                currentMinutes++;
+            }
         }
         System.out.println(currentSeconds);
         //This long thing sets the text area with the current mintues and seconds.
-        timerWindow.area.setText(Integer.toString(currentMinutes) + " Mintues" + Integer.toString(currentSeconds) + " Seconds");
-        }
+        area.setText(Integer.toString(currentMinutes) + " Mintues" + Integer.toString(currentSeconds) + " Seconds");    
     }
-    public void setRunning(boolean running){
-        this.running = running;
+    public void setRunning(boolean isRunning){
+        this.isRunning = isRunning;
     }
     public void setCurrentSeconds(int currentSeconds){
         this.currentSeconds = currentSeconds;
+    }
+
+    public void handleButtonPress(Object src){
+        if(src == button1){          
+            if(isRunning){
+                isRunning = false;
+                area.append(" Stopped");
+            }else{
+                isRunning = true;
+                area.append(" Started");                
+            }
+        }
+        if(src == button2){
+            area.setText("Cleared");
+            currentSeconds = 0;
+            currentMinutes = 0;
+        }
     }
 }
