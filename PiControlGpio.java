@@ -18,22 +18,8 @@
 //import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 //import com.pi4j.io.gpio.event.PinEventType;
 public class PiControlGpio{
-    String binarySeconds;
-    String binaryMinutes;
+
     PiControlGpio(){
-        binarySeconds = "";
-        binaryMinutes = "";
-    }
-    public void setBinaryTime(int currentSeconds, int currentMintues){
-        binarySeconds = Integer.toBinaryString(currentSeconds);
-        binaryMinutes = Integer.toBinaryString(currentMintues);
-        System.out.println(binarySeconds);
-        System.out.println(binaryMinutes);
-    }
-    public String getBinaryMinutes() {
-        return binaryMinutes;
-    }
-    public String getBinarySeconds() {
-        return binarySeconds;
+
     }
 }

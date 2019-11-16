@@ -5,8 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Intervaler extends TimerTask{
-    int currentSeconds;
-    int currentMinutes;
+    int decimalSeconds;
+    int decimalMintues;
+    String binarySeconds;
+    String binaryMinutes;
     boolean isRunning;
     JFrame frame;
     JPanel panel;
@@ -16,8 +18,10 @@ public class Intervaler extends TimerTask{
     Intervaler intervaler;
     PiControlGpio controlGpio;
     public Intervaler(){
-        currentSeconds = 0;
-        currentMinutes = 0;
+        decimalSeconds = 0;
+        decimalMintues = 0;
+        binarySeconds = "";
+        binaryMinutes = "";
         isRunning = false;
         controlGpio = new PiControlGpio();
         //Creates the frame
@@ -42,32 +46,63 @@ public class Intervaler extends TimerTask{
     }
     public void run(){
         if(isRunning){
-            if(currentSeconds<60){
-                currentSeconds++;
+            if(decimalSeconds<60){
+                decimalSeconds++;
             }else{
-                currentSeconds = 0;
-                currentMinutes++;
+                decimalSeconds = 0;
+                decimalMintues++;
             }
         }
-        //This long thing sets the text area with the current mintues and seconds.
-        area.setText(Integer.toString(currentMinutes) + " : " + Integer.toString(currentSeconds)); 
-        controlGpio.setBinaryTime(currentSeconds, currentMinutes);
-        area.append("\n" + controlGpio.getBinaryMinutes() + " : " + controlGpio.getBinarySeconds());   
+        //This sets the text area with the decimal mintues and seconds.
+        area.setText(stringOfDecimalMintues() + " : " + stringOfDecimalSeconds()); 
+        //This sets the binary time in PiControlGpio equal to the current time and also puts it in the text area.
+        setBinaryTime(decimalSeconds, decimalMintues);
+        area.append("\n" + getBinaryMinutes() + " : " + getBinarySeconds());   
+    }
+    public void setBinaryTime(int currentSeconds, int currentMintues){
+        binarySeconds = Integer.toBinaryString(currentSeconds);
+            for(int i = binarySeconds.length(); i<6; i++){
+                binarySeconds = "0" + binarySeconds;
+            }  
+        binaryMinutes = Integer.toBinaryString(currentMintues);
+            for(int i = binaryMinutes.length(); i<6; i++){
+            binaryMinutes = "0" + binaryMinutes;
+        }  
     }
     public void setRunning(boolean isRunning){
         this.isRunning = isRunning;
     }
-    public void setCurrentSeconds(int currentSeconds){
-        this.currentSeconds = currentSeconds;
+    public void setDecimalSeconds(int decimalSeconds){
+        this.decimalSeconds = decimalSeconds;
     }
-    public void setCurrentMinutes(int currentMinutes){
-        this.currentMinutes = currentMinutes;
+    public void setDecimalMintues(int decimalMintues){
+        this.decimalMintues = decimalMintues;
     }
-    public int getCurrentSeconds(){
-        return currentSeconds;
+    public int getDecimalSeconds(){
+        return decimalSeconds;
     }
-    public int getCurrentMinutes(){
-        return currentSeconds;
+    public int getDecimalMintues(){
+        return decimalSeconds;
+    }
+    public String getBinaryMinutes() {
+        return binaryMinutes;
+    }
+    public String getBinarySeconds() {
+        return binarySeconds;
+    }
+    public String stringOfDecimalSeconds(){
+        String string = Integer.toString(decimalSeconds);
+        for(int i = string.length(); i<2; i++){
+            string = "0" + string;
+        }  
+        return string;
+    }
+    public String stringOfDecimalMintues(){
+        String string = Integer.toString(decimalMintues);
+        for(int i = string.length(); i<2; i++){
+            string = "0" + string;
+        }  
+        return string;
     }
     public void handleButtonPress(Object src){
         //Start/Stop button
@@ -81,8 +116,8 @@ public class Intervaler extends TimerTask{
         //Clear button
         if(src == button2){
             area.setText("Cleared");
-            currentSeconds = 0;
-            currentMinutes = 0;
+            decimalSeconds = 0;
+            decimalMintues = 0;
         }
     }
 }
