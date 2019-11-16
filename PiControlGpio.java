@@ -22,4 +22,25 @@ public class PiControlGpio{
     PiControlGpio(){
 
     }
+
+    public void updateSecondsLeds(String binarySeconds){
+        for(int i = 0; i<binarySeconds.length(); i++){
+            if(binarySeconds.charAt(i) == '1'){
+                System.out.print(" :sLight " + i + " (On): ");
+            }
+            if(binarySeconds.charAt(i) == '0'){
+                System.out.print(" :sLight " + i + " (Off): ");
+            }
+        }
+    }
+    public void updateMinutesLeds(String binaryMinutes){
+        for(int i = 0; i<binaryMinutes.length(); i++){
+            if(binaryMinutes.charAt(i) == '1'){
+                System.out.print(" :mLight " + i + " (On): ");
+            }
+            if(binaryMinutes.charAt(i) == '0'){
+                System.out.print(" :mLight " + i + " (Off): ");
+            }
+        }
+    }
 }

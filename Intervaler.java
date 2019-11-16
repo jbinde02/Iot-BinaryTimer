@@ -6,7 +6,7 @@ import javax.swing.JTextArea;
 
 public class Intervaler extends TimerTask{
     int decimalSeconds;
-    int decimalMintues;
+    int decimalMinutes;
     String binarySeconds;
     String binaryMinutes;
     boolean isRunning;
@@ -19,7 +19,7 @@ public class Intervaler extends TimerTask{
     PiControlGpio controlGpio;
     public Intervaler(){
         decimalSeconds = 0;
-        decimalMintues = 0;
+        decimalMinutes = 0;
         binarySeconds = "";
         binaryMinutes = "";
         isRunning = false;
@@ -50,21 +50,26 @@ public class Intervaler extends TimerTask{
                 decimalSeconds++;
             }else{
                 decimalSeconds = 0;
-                decimalMintues++;
+                decimalMinutes++;
             }
         }
-        //This sets the text area with the decimal mintues and seconds.
-        area.setText(stringOfDecimalMintues() + " : " + stringOfDecimalSeconds()); 
+        //This sets the text area with the decimal Minutes and seconds.
+        area.setText(stringOfDecimalMinutes() + " : " + stringOfDecimalSeconds()); 
         //This sets the binary time in PiControlGpio equal to the current time and also puts it in the text area.
-        setBinaryTime(decimalSeconds, decimalMintues);
-        area.append("\n" + getBinaryMinutes() + " : " + getBinarySeconds());   
+        setBinaryTime(decimalSeconds, decimalMinutes);
+        area.append("\n" + getBinaryMinutes() + " : " + getBinarySeconds()); 
+        //This is the Pi bit
+        controlGpio.updateSecondsLeds(binarySeconds);  
+        System.out.println("");
+        controlGpio.updateMinutesLeds(binaryMinutes);
+        System.out.println("");
     }
-    public void setBinaryTime(int currentSeconds, int currentMintues){
+    public void setBinaryTime(int currentSeconds, int currentMinutes){
         binarySeconds = Integer.toBinaryString(currentSeconds);
             for(int i = binarySeconds.length(); i<6; i++){
                 binarySeconds = "0" + binarySeconds;
             }  
-        binaryMinutes = Integer.toBinaryString(currentMintues);
+        binaryMinutes = Integer.toBinaryString(currentMinutes);
             for(int i = binaryMinutes.length(); i<6; i++){
             binaryMinutes = "0" + binaryMinutes;
         }  
@@ -75,13 +80,13 @@ public class Intervaler extends TimerTask{
     public void setDecimalSeconds(int decimalSeconds){
         this.decimalSeconds = decimalSeconds;
     }
-    public void setDecimalMintues(int decimalMintues){
-        this.decimalMintues = decimalMintues;
+    public void setDecimalMinutes(int decimalMinutes){
+        this.decimalMinutes = decimalMinutes;
     }
     public int getDecimalSeconds(){
         return decimalSeconds;
     }
-    public int getDecimalMintues(){
+    public int getDecimalMinutes(){
         return decimalSeconds;
     }
     public String getBinaryMinutes() {
@@ -97,8 +102,8 @@ public class Intervaler extends TimerTask{
         }  
         return string;
     }
-    public String stringOfDecimalMintues(){
-        String string = Integer.toString(decimalMintues);
+    public String stringOfDecimalMinutes(){
+        String string = Integer.toString(decimalMinutes);
         for(int i = string.length(); i<2; i++){
             string = "0" + string;
         }  
@@ -117,7 +122,7 @@ public class Intervaler extends TimerTask{
         if(src == button2){
             area.setText("Cleared");
             decimalSeconds = 0;
-            decimalMintues = 0;
+            decimalMinutes = 0;
         }
     }
 }
