@@ -17,9 +17,9 @@
 //import com.pi4j.io.gpio.event.GpioPinEvent;
 //import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 //import com.pi4j.io.gpio.event.PinEventType;
-public class PiControlGpio{
+public class PiControlGpioTest{
 
-    PiControlGpio(){
+    PiControlGpioTest(){
 
     }
 
