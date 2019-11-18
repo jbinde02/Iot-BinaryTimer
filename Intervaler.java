@@ -52,7 +52,6 @@ public class Intervaler extends TimerTask{
                 decimalSeconds = 0;
                 decimalMinutes++;
             }
-        }
         //This sets the text area with the decimal Minutes and seconds.
         area.setText(stringOfDecimalMinutes() + " : " + stringOfDecimalSeconds()); 
         //This sets the binary time in PiControlGpio equal to the current time and also puts it in the text area.
@@ -63,6 +62,8 @@ public class Intervaler extends TimerTask{
         System.out.println("");
         controlGpio.updateMinutesLeds(binaryMinutes);
         System.out.println("");
+        }
+
     }
     public void setBinaryTime(int currentSeconds, int currentMinutes){
         binarySeconds = Integer.toBinaryString(currentSeconds);

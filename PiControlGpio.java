@@ -16,14 +16,14 @@ public class PiControlGpio{
         sLed3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_11, "seconds LED 3", PinState.LOW);
         sLed4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_13, "seconds LED 4", PinState.LOW);
         sLed5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_15, "seconds LED 5", PinState.LOW);
-        sLedArray = new GpioPinDigitalOutput[]{sLed0, sLed1, sLed2, sLed3, sLed4, sLed5};
+        sLedArray = new GpioPinDigitalOutput[]{sLed0, sLed1, sLed2, sLed3, sLed4, sLed5}; //Seconds Pins
         mLed0 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_19, "mintues LED 0", PinState.LOW);
         mLed1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_21, "mintues LED 1", PinState.LOW);
         mLed2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "mintues LED 2", PinState.LOW);
         mLed3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_27, "mintues LED 3", PinState.LOW);
         mLed4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "mintues LED 4", PinState.LOW);
         mLed5 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_31, "mintues LED 5", PinState.LOW);
-        mLedArray = new GpioPinDigitalOutput[]{sLed0, mLed1, mLed2, mLed3, mLed4, mLed5};
+        mLedArray = new GpioPinDigitalOutput[]{mLed0, mLed1, mLed2, mLed3, mLed4, mLed5}; //Minutes Pins
     }
 
     public void updateSecondsLeds(String binarySeconds){
