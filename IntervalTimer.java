@@ -9,6 +9,6 @@ public class IntervalTimer extends Timer{
         timer.schedule(intervaler, 1000, 1000);      
     }
     public static void main(String[] args) {
-        new IntervalTimer();
+        IntervalTimer intervalTimer = new IntervalTimer();
     }
 }

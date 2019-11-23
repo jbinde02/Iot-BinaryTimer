@@ -58,10 +58,10 @@ public class Intervaler extends TimerTask{
         setBinaryTime(decimalSeconds, decimalMinutes);
         area.append("\n" + getBinaryMinutes() + " : " + getBinarySeconds()); 
         //This is the Pi bit
-        controlGpio.updateSecondsLeds(binarySeconds);  
+        controlGpio.updateSecondsLeds(binarySeconds);
         System.out.println("");
         controlGpio.updateMinutesLeds(binaryMinutes);
-        System.out.println("");
+        System.out.println();
         }
 
     }
