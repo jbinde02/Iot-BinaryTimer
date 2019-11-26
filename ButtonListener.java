@@ -1,4 +1,8 @@
 import java.awt.event.*;
+
+/**
+ * Buttons listener.
+ */
 public class ButtonListener implements ActionListener{
     Intervaler master;
     public ButtonListener (Intervaler master) {

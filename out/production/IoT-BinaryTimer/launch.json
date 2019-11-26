@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - IntervalTimer",
+            "request": "launch",
+            "mainClass": "IntervalTimer",
+            "projectName": "IoT-BinaryTimer_8ed33012"
+        }
+    ]
+}
